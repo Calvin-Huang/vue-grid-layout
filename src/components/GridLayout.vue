@@ -115,6 +115,7 @@
         },
         data: function () {
             return {
+                responsiveColNum: null,
                 width: null,
                 mergedStyle: {},
                 lastLayoutLength: 0,
@@ -406,6 +407,7 @@
             responsiveGridLayout(){
                 let newBreakpoint = getBreakpointFromWidth(this.breakpoints, this.width);
                 let newCols = getColsFromBreakpoint(newBreakpoint, this.cols);
+                this.responsiveColNum = newCols
 
                 // save actual layout in layouts
                 if(this.lastBreakpoint != null && !this.layouts[this.lastBreakpoint])
