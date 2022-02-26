@@ -18,6 +18,7 @@
 </style>
 <script>
     import Vue from 'vue';
+    import debounce from 'lodash.debounce';
     const elementResizeDetectorMaker = require("element-resize-detector");
 
     import {bottom, compact, getLayoutItem, moveElement, validateLayout, cloneLayout, getAllCollisions} from '@/helpers/utils';
@@ -230,9 +231,9 @@
                     this.updateHeight();
                 });
             },
-            layout: function () {
+            layout: debounce(function () {
                 this.layoutUpdate();
-            },
+            }, 50),
             colNum: function (val) {
                 this.eventBus.$emit("setColNum", val);
             },
