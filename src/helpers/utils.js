@@ -206,7 +206,7 @@ export function getStatics(layout: Layout): Array<LayoutItem> {
  * @param  {Boolean}    [isUserAction] If true, designates that the item we're moving is
  *                                     being dragged/resized by th euser.
  */
-export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number, isUserAction: Boolean, preventCollision: Boolean): Layout {
+export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number, isUserAction: Boolean, preventCollision: Boolean, colNum: Number): Layout {
   if (l.static) return layout;
 
   // Short-circuit if nothing to do.
@@ -214,6 +214,34 @@ export function moveElement(layout: Layout, l: LayoutItem, x: Number, y: Number,
 
   const oldX = l.x;
   const oldY = l.y;
+
+  const oldIndex = oldY * colNum + oldX
+  const targetIndex = y * colNum + x
+
+  if ((!x && x !== 0) || (!y && y !== 0)) {
+    return layout
+  }
+
+  if (oldIndex === targetIndex) {
+    return layout;
+  }
+
+  for (const item of layout) {
+    const i = item.y * colNum + item.x
+    if (targetIndex > oldIndex) {
+      if (i > oldIndex && i <= targetIndex) {
+        const newI = i - 1
+        item.x = newI % colNum
+        item.y = Math.floor(newI / colNum)
+      }
+    } else {
+      if (i >= targetIndex && i < oldIndex) {
+        const newI = i + 1
+        item.x = newI % colNum
+        item.y = Math.floor(newI / colNum)
+      }
+    }
+  }
 
   const movingUp = y && l.y > y;
   // This is quite a bit faster than extending the object
