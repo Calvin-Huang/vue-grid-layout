@@ -1447,7 +1447,7 @@ module.exports = __webpack_require__("8e60") ? function (object, key, value) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5af25f9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=template&id=0b75ae14&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"446a4454-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridLayout.vue?vue&type=template&id=0b75ae14&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"item",staticClass:"vue-grid-layout",style:(_vm.mergedStyle)},[_vm._t("default"),_c('grid-item',{directives:[{name:"show",rawName:"v-show",value:(_vm.isDragging),expression:"isDragging"}],staticClass:"vue-grid-placeholder",attrs:{"x":_vm.placeholder.x,"y":_vm.placeholder.y,"w":_vm.placeholder.w,"h":_vm.placeholder.h,"i":_vm.placeholder.i}})],2)}
 var staticRenderFns = []
 
@@ -1509,7 +1509,7 @@ var utils = __webpack_require__("a2b6");
 // EXTERNAL MODULE: ./src/helpers/responsiveUtils.js
 var responsiveUtils = __webpack_require__("97a7");
 
-// EXTERNAL MODULE: ./src/components/GridItem.vue + 70 modules
+// EXTERNAL MODULE: ./src/components/GridItem.vue + 67 modules
 var GridItem = __webpack_require__("bc21");
 
 // EXTERNAL MODULE: ./src/helpers/DOM.js
@@ -5328,12 +5328,12 @@ __webpack_require__.d(all_namespaceObject, "edgeTarget", function() { return edg
 __webpack_require__.d(all_namespaceObject, "elements", function() { return snappers_elements; });
 __webpack_require__.d(all_namespaceObject, "grid", function() { return grid; });
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5af25f9c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=template&id=4468ac46&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"446a4454-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=template&id=10d8956b&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"item",staticClass:"vue-grid-item",class:_vm.classObj,style:(_vm.style)},[_vm._t("default"),(_vm.resizableAndNotStatic)?_c('span',{ref:"handle",class:_vm.resizableHandleClass}):_vm._e()],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=template&id=4468ac46&
+// CONCATENATED MODULE: ./src/components/GridItem.vue?vue&type=template&id=10d8956b&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -11762,158 +11762,6 @@ const plugin_modifiers = {
 
 _interactjs_interact.use(modifiers_plugin);
 //# sourceMappingURL=index.js.map
-// CONCATENATED MODULE: ./node_modules/@interactjs/dev-tools/visualizer/plugin.js
-/* harmony default export */ var visualizer_plugin = ({});
-//# sourceMappingURL=plugin.js.map
-// CONCATENATED MODULE: ./node_modules/@interactjs/dev-tools/plugin.js
-
-
-
-
-
-
-var CheckName;
-
-(function (CheckName) {
-  CheckName["touchAction"] = "touchAction";
-  CheckName["boxSizing"] = "boxSizing";
-  CheckName["noListeners"] = "noListeners";
-})(CheckName || (CheckName = {}));
-
-const prefix = '[interact.js] ';
-const links = {
-  touchAction: 'https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action',
-  boxSizing: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing'
-}; // eslint-disable-next-line no-undef
-
-const isProduction = "development" === 'production';
-
-function dev_tools_plugin_install(scope, {
-  logger
-} = {}) {
-  const {
-    Interactable,
-    defaults
-  } = scope;
-  scope.logger = logger || console;
-  defaults.base.devTools = {
-    ignore: {}
-  };
-
-  Interactable.prototype.devTools = function (options) {
-    if (options) {
-      extend(this.options.devTools, options);
-      return this;
-    }
-
-    return this.options.devTools;
-  };
-
-  scope.usePlugin(visualizer_plugin);
-}
-
-const checks = [{
-  name: CheckName.touchAction,
-
-  perform({
-    element
-  }) {
-    return !parentHasStyle(element, 'touchAction', /pan-|pinch|none/);
-  },
-
-  getInfo({
-    element
-  }) {
-    return [element, links.touchAction];
-  },
-
-  text: 'Consider adding CSS "touch-action: none" to this element\n'
-}, {
-  name: CheckName.boxSizing,
-
-  perform(interaction) {
-    const {
-      element
-    } = interaction;
-    return interaction.prepared.name === 'resize' && element instanceof utils_domObjects.HTMLElement && !hasStyle(element, 'boxSizing', /border-box/);
-  },
-
-  text: 'Consider adding CSS "box-sizing: border-box" to this resizable element',
-
-  getInfo({
-    element
-  }) {
-    return [element, links.boxSizing];
-  }
-
-}, {
-  name: CheckName.noListeners,
-
-  perform(interaction) {
-    const actionName = interaction.prepared.name;
-    const moveListeners = interaction.interactable.events.types[`${actionName}move`] || [];
-    return !moveListeners.length;
-  },
-
-  getInfo(interaction) {
-    return [interaction.prepared.name, interaction.interactable];
-  },
-
-  text: 'There are no listeners set for this action'
-}];
-
-function hasStyle(element, prop, styleRe) {
-  const value = element.style[prop] || win.getComputedStyle(element)[prop];
-  return styleRe.test((value || '').toString());
-}
-
-function parentHasStyle(element, prop, styleRe) {
-  let parent = element;
-
-  while (is.element(parent)) {
-    if (hasStyle(parent, prop, styleRe)) {
-      return true;
-    }
-
-    parent = parentNode(parent);
-  }
-
-  return false;
-}
-
-const plugin_id = 'dev-tools';
-const defaultExport = isProduction ? {
-  id: plugin_id,
-  install: () => {}
-} : {
-  id: plugin_id,
-  install: dev_tools_plugin_install,
-  listeners: {
-    'interactions:action-start': ({
-      interaction
-    }, scope) => {
-      for (const check of checks) {
-        const options = interaction.interactable && interaction.interactable.options;
-
-        if (!(options && options.devTools && options.devTools.ignore[check.name]) && check.perform(interaction)) {
-          scope.logger.warn(prefix + check.text, ...check.getInfo(interaction));
-        }
-      }
-    }
-  },
-  checks,
-  CheckName,
-  links,
-  prefix
-};
-/* harmony default export */ var dev_tools_plugin = (defaultExport);
-//# sourceMappingURL=plugin.js.map
-// CONCATENATED MODULE: ./node_modules/@interactjs/dev-tools/index.js
-/* eslint-disable import/order, no-console, eol-last */
-
-
-_interactjs_interact.use(dev_tools_plugin);
-//# sourceMappingURL=index.js.map
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/GridItem.vue?vue&type=script&lang=js&
 
 
@@ -12009,7 +11857,6 @@ _interactjs_interact.use(dev_tools_plugin);
 
 
  //    var eventBus = require('./eventBus');
-
 
 
 
